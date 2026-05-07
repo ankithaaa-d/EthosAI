@@ -1,0 +1,29 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.venv
+venv/
+ENV/
+env/
+.env
+
+# Models & Weights
+ethosai/model_weights/
+ethosai/models/*.pt
+*.pt
+*.bin
+*.h5
+
+# Frontend
+.DS_Store
+ethosai_frontend/node_modules/
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+
+# OS
+Thumbs.db
+Desktop.ini

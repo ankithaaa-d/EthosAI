@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EthosAI | Ethical AI Middleware</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">
+                <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="32" height="32" rx="8" fill="url(#paint0_linear)"/>
+                    <path d="M16 8L22 14L16 20L10 14L16 8Z" fill="white"/>
+                    <defs>
+                        <linearGradient id="paint0_linear" x1="0" y1="0" x2="32" y2="32" gradientUnits="userSpaceOnUse">
+                            <stop stop-color="#00FF88"/>
+                            <stop offset="1" stop-color="#6366F1"/>
+                        </linearGradient>
+                    </defs>
+                </svg>
+                EthosAI
+            </div>
+            <nav style="display: flex; gap: 1rem; align-items: center;">
+                <button id="theme-toggle" class="theme-toggle">
+                    <span id="theme-icon">🌙</span> Dark Mode
+                </button>
+                <a href="#" style="color: var(--primary); text-decoration: none; font-weight: 600;">API Dashboard</a>
+            </nav>
+        </header>
+
+        <section class="hero">
+            <h1>The Ethics Firewall for AI</h1>
+            <p>Middleware that ensures your agents scrape ethically and stay compliant.</p>
+            
+            <div class="search-container">
+                <input type="text" id="url-input" class="search-input" placeholder="https://website-to-analyze.com">
+                <button id="analyze-btn" class="btn-analyze">Analyze</button>
+            </div>
+        </section>
+
+        <div id="loading" class="hidden">
+            <div class="loading-spinner"></div>
+            <p style="text-align: center; color: var(--text-muted);">Running ML Inference & Semantic Policy Analysis...</p>
+        </div>
+
+        <section id="results" class="results-grid">
+            <div class="main-report glass-panel">
+                <div class="compliance-status">
+                    <div id="status-dot" class="status-indicator"></div>
+                    <h2 id="status-label">Compliance Analysis</h2>
+                </div>
+                
+                <div class="card">
+                    <h3>Explainable Reasoning</h3>
+                    <div id="reasoning-text" class="reasoning-panel">
+                        Enter a URL above to start the analysis.
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3>ML Signals</h3>
+                    <div id="ml-signals" style="display: flex; gap: 2rem; margin-top: 1rem;">
+                        <div>
+                            <span style="color: var(--text-muted); font-size: 0.9rem;">Permission</span>
+                            <div id="signal-permission" style="font-weight: 700; font-family: 'Outfit'; font-size: 1.2rem;">--</div>
+                        </div>
+                        <div>
+                            <span style="color: var(--text-muted); font-size: 0.9rem;">Risk Score</span>
+                            <div id="signal-risk" style="font-weight: 700; font-family: 'Outfit'; font-size: 1.2rem;">--</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <aside class="sidebar">
+                <div class="card glass-panel" style="padding: 1.5rem;">
+                    <h3>Usage History</h3>
+                    <div class="chart-container">
+                        <canvas id="usageChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="card glass-panel" style="padding: 1.5rem; margin-top: 1.5rem;">
+                    <h3>Policy Extracted</h3>
+                    <div id="policy-content" style="font-size: 0.85rem; color: var(--text-muted); height: 200px; overflow-y: auto; margin-top: 1rem;">
+                        Waiting for data...
+                    </div>
+                </div>
+
+                <div class="card glass-panel" style="padding: 1.5rem; margin-top: 1.5rem;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                        <h3 style="margin: 0;">API Quick Start</h3>
+                        <button id="copy-btn" style="background: var(--primary-glow); border: 1px solid var(--primary); color: var(--primary); padding: 2px 8px; border-radius: 4px; font-size: 0.7rem; cursor: pointer;">Copy</button>
+                    </div>
+                    <div id="quick-start-code" style="font-family: 'Courier New', monospace; font-size: 0.75rem; background: rgba(0,0,0,0.4); padding: 1rem; border-radius: 8px; color: var(--primary); border: 1px solid var(--border-glass); white-space: pre-wrap; word-break: break-all;">
+curl -X POST <span id="api-url-display">http://localhost:8000</span>/analyze \
+-H "X-Ethos-Key: <span id="api-key-display">YOUR_KEY</span>" \
+-d '{"url":"..."}'
+                    </div>
+                </div>
+            </aside>
+        </section>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
