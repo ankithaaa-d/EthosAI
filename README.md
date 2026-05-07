@@ -1,57 +1,78 @@
 # EthosAI — The Ethical Firewall for AI Agents 🛡️🤖
 
-![EthosAI Interaction Flow](https://raw.githubusercontent.com/username/repo/main/artifacts/infographic.png)
+**EthosAI** is a high-performance, AI-powered middleware platform that acts as an ethical layer between AI agents and the web. It ensures that automated systems interact with websites in compliance with legal terms, `robots.txt` instructions, and ethical standards.
 
-EthosAI is an intelligent, AI-powered middleware designed to ensure that AI agents interact with the web ethically and legally. It analyzes website policies, robots.txt, and terms of service in real-time, providing an **"Explainable Compliance Score"** that tells AI agents whether to proceed, stop, or seek a license.
+---
 
-## 🌟 Key Features
+## 🛑 The Problem
+As AI agents (LLMs, crawlers, and autonomous bots) increasingly navigate the web, they often ignore the "rules of the road." 
+- **Legal Risk**: Bots frequently violate Terms of Service (ToS), leading to potential litigation.
+- **Ethical Gaps**: Standard scrapers don't understand the *intent* of a website's restrictions.
+- **Complexity**: Manually parsing `robots.txt` and legal jargon is impossible for agents in real-time.
+- **Data Privacy**: Sending policy data to external clouds for analysis creates a secondary privacy risk.
 
-- **Intelligence Pipeline**: Combines ML Classifiers (PyTorch) with Semantic Legal Analysis.
-- **OpenCLAW Integration**: Uses the Open Compliance Legal Analysis Workflow for high-accuracy policy parsing.
-- **Explainable AI (XAI)**: Generates detailed natural language reasoning using a locally hosted Llama 3 model (via Ollama).
-- **AI-Ready API**: Fully documented REST API with built-in discoverability for GPT Actions and Claude Tools.
-- **Premium Dashboard**: A sleek, glassmorphism-based frontend for human researchers to audit compliance manually.
-- **Privacy First**: All legal reasoning is processed locally using Ollama—no data is sent to external clouds.
+## 💡 The Solution
+EthosAI provides a real-time **Ethical Firewall** that translates complex legal and technical policies into a simple, actionable **Compliance Score**.
+- **OpenCLAW Integration**: Uses the Open Compliance Legal Analysis Workflow for precision.
+- **ML-Powered**: Leverages PyTorch-based classifiers to detect restrictive patterns.
+- **Explainable AI (XAI)**: Generates natural language reasoning using local Llama 3 via Ollama, explaining *why* an action is allowed or denied.
+- **Privacy First**: All processing is local. Your browsing/scraping intent never leaves your infrastructure.
 
-## 🚀 Tech Stack
+---
 
-- **Backend**: FastAPI, Uvicorn, PyTorch, Transformers (MiniLM).
-- **Frontend**: HTML5, Vanilla CSS, JS, Chart.js.
-- **Reasoning**: Ollama (Llama 3).
-- **Database/Vector**: Scikit-Learn (Cosine Similarity Search).
+## ⚙️ Setup
 
-## 🛠️ Installation
+### Prerequisites
+- **Python**: Version 3.9 or higher.
+- **Ollama**: Required for local reasoning. [Download Ollama here](https://ollama.com/).
+  - After installing, run: `ollama pull llama3`
 
-### 1. Prerequisites
-- Python 3.9+
-- [Ollama](https://ollama.com/) (running `llama3`)
-
-### 2. Setup Backend
+### 1. Clone the Repository
 ```bash
-# Clone the repo
 git clone https://github.com/yourusername/EthosAI.git
-cd EthosAI/ethosai
-
-# Install dependencies
-pip install -r requirements.txt
-
-# Configure environment
-cp .env.example .env
-
-# Start the server
-uvicorn main:app --port 8000 --reload
+cd EthosAI
 ```
 
-### 3. Setup Frontend
-Simply open `ethosai_frontend/index.html` in your browser. No build process required!
+### 2. Backend Configuration
+```bash
+cd ethosai
+python -m venv .venv
+source .venv/bin/activate  # On Windows use: .venv\Scripts\activate
+pip install -r requirements.txt
+cp .env.example .env
+```
 
-## 🔌 API Usage
+### 3. Frontend Configuration
+The frontend is a lightweight, high-performance dashboard. No installation is required; it connects directly to your local backend.
 
-EthosAI is designed to be called programmatically by AI agents.
+---
 
-**Endpoint**: `POST /analyze`
-**Header**: `X-Ethos-Key: your_api_key`
+## 📖 Instructions
 
+### Running the Backend
+Start the FastAPI server using Uvicorn:
+```bash
+cd ethosai
+uvicorn main:app --host 0.0.0.0 --port 8000 --reload
+```
+The API documentation will be available at `http://localhost:8000/docs`.
+
+### Launching the Dashboard
+Open the management interface to monitor AI agent compliance in real-time:
+1. Navigate to the `ethosai_frontend` folder.
+2. Open `index.html` in any modern web browser (Chrome, Firefox, or Edge).
+
+---
+
+## 🚀 Usage
+
+### Integrating with AI Agents
+AI agents can query EthosAI before performing any web action.
+
+**Endpoint**: `POST /analyze`  
+**Auth**: `X-Ethos-Key: your_api_key`
+
+#### Example Request
 ```bash
 curl -X POST http://localhost:8000/analyze \
      -H "X-Ethos-Key: ethos_default_dev_key" \
@@ -59,16 +80,16 @@ curl -X POST http://localhost:8000/analyze \
      -d '{"url": "https://example.com"}'
 ```
 
-## 📊 Interaction Flow
-
-1. **Input**: User/AI sends a URL.
-2. **Extraction**: EthosAI fetches Robots.txt, ToS, and Metadata.
-3. **ML Inference**: PyTorch models predict permission levels.
-4. **Semantic Analysis**: OpenCLAW reasoning via Llama 3 parses legal nuance.
-5. **Decision**: Final action (ALLOW/RESTRICT) + Risk Score returned.
-
-## 📜 License
-EthosAI is released under the MIT License. See [LICENSE](LICENSE) for details.
+#### Example Response
+```json
+{
+  "url": "https://example.com",
+  "status": "RESTRICTED",
+  "score": 0.2,
+  "reasoning": "The website's terms of service explicitly prohibit AI training and commercial scraping. Robots.txt disallows all user-agents from the /data/ directory.",
+  "timestamp": "2024-05-07T23:13:26Z"
+}
+```
 
 ---
-Built with ❤️ for a more ethical AI-powered web.
+*Built for a transparent, ethical, and agent-friendly web.*
