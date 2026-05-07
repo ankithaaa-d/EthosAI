@@ -1,10 +1,8 @@
-# EthosAI — The Ethical Firewall for AI Agents 🛡️🤖
-
-![EthosAI Interaction Flow](https://raw.githubusercontent.com/username/repo/main/artifacts/infographic.png)
+# EthosAI — The Ethical Firewall for AI Agents 
 
 EthosAI is an intelligent, AI-powered middleware designed to ensure that AI agents interact with the web ethically and legally. It analyzes website policies, robots.txt, and terms of service in real-time, providing an **"Explainable Compliance Score"** that tells AI agents whether to proceed, stop, or seek a license.
 
-## 🌟 Key Features
+## Key Features
 
 - **Intelligence Pipeline**: Combines ML Classifiers (PyTorch) with Semantic Legal Analysis.
 - **OpenCLAW Integration**: Uses the Open Compliance Legal Analysis Workflow for high-accuracy policy parsing.
@@ -13,14 +11,14 @@ EthosAI is an intelligent, AI-powered middleware designed to ensure that AI agen
 - **Premium Dashboard**: A sleek, glassmorphism-based frontend for human researchers to audit compliance manually.
 - **Privacy First**: All legal reasoning is processed locally using Ollama—no data is sent to external clouds.
 
-## 🚀 Tech Stack
+## Tech Stack
 
 - **Backend**: FastAPI, Uvicorn, PyTorch, Transformers (MiniLM).
 - **Frontend**: HTML5, Vanilla CSS, JS, Chart.js.
 - **Reasoning**: Ollama (Llama 3).
 - **Database/Vector**: Scikit-Learn (Cosine Similarity Search).
 
-## 🛠️ Installation
+##  Installation
 
 ### 1. Prerequisites
 - Python 3.9+
@@ -45,7 +43,7 @@ uvicorn main:app --port 8000 --reload
 ### 3. Setup Frontend
 Simply open `ethosai_frontend/index.html` in your browser. No build process required!
 
-## 🔌 API Usage
+## API Usage
 
 EthosAI is designed to be called programmatically by AI agents.
 
@@ -59,7 +57,7 @@ curl -X POST http://localhost:8000/analyze \
      -d '{"url": "https://example.com"}'
 ```
 
-## 📊 Interaction Flow
+## Interaction Flow
 
 1. **Input**: User/AI sends a URL.
 2. **Extraction**: EthosAI fetches Robots.txt, ToS, and Metadata.
@@ -67,7 +65,7 @@ curl -X POST http://localhost:8000/analyze \
 4. **Semantic Analysis**: OpenCLAW reasoning via Llama 3 parses legal nuance.
 5. **Decision**: Final action (ALLOW/RESTRICT) + Risk Score returned.
 
-## 📜 License
+##  License
 EthosAI is released under the MIT License. See [LICENSE](LICENSE) for details.
 
 ---
